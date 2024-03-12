@@ -12,9 +12,14 @@ class Router
     {
         $action = $_GET['action'] ?? 'index';
 
+        $params = $_REQUEST;
+
         return match ($action) {
-            'save' => SaveController::class,
-            default => IndexController::class,
+            'save' => SaveController(($params)),
+           // 'help' =>
+            //sale
+            //updatelist
+            default => new IndexController($params),
         };
     }
 }
