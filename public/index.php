@@ -11,6 +11,8 @@ EnvReader::readEnv(DOT_ENV_PATH);
 
 $dataProvider  = MySQLDataProvider::getInstance(getenv('DB_HOST'), getenv('DB_NAME'), getenv('DB_USER'), getenv('DB_PASSWORD'));
 
+$params = $_REQUEST;
+
 $router = new Router();
 $handle = $router->handleRequest();
-$handle($dataProvider);
+$handle($dataProvider, $params);

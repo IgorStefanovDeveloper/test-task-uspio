@@ -2,8 +2,12 @@
 
 namespace App\Router;
 
+use App\Controllers\Controller;
+use App\Controllers\ControllerInterface;
+use App\Controllers\GoogleMap\HelpController;
 use App\Controllers\IndexController;
-use App\Controllers\MapRequest\SaveController;
+use App\Controllers\MapHistory\SaveController;
+use App\Controllers\MapHistory\UpdatelistController;
 
 class Router
 {
@@ -15,11 +19,10 @@ class Router
         $params = $_REQUEST;
 
         return match ($action) {
-            'save' => SaveController(($params)),
-           // 'help' =>
-            //sale
-            //updatelist
-            default => new IndexController($params),
+            'save' => new SaveController(),
+            'help' => new HelpController(),
+            'updatelist' => new UpdatelistController(),
+            default => new IndexController(),
         };
     }
 }

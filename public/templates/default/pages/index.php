@@ -14,18 +14,16 @@ ob_start();
             <img src="<?= $staticMapUrl ?>" alt="Map" class="img-fluid">
         </div>
     </div>
-    <?php if (!empty($mapHistoryList)) { ?>
         <div class="row mt-4">
             <div class="col-md-12">
                 <h2>Map History</h2>
                 <ul class="list-group map-history">
                     <?php foreach ($mapHistoryList as $item) { ?>
-                        <li class="list-group-item"><?= $item->address ?></li>
+                        <li class="list-group-item"><?= $item['address'] ?></li>
                     <?php } ?>
                 </ul>
             </div>
         </div>
-    <?php } ?>
 </div>
 <?php
 

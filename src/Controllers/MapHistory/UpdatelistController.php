@@ -6,12 +6,13 @@ use App\Controllers\Controller;
 use App\Models\MapHistory;
 use App\Helpers\DataProvider\DataProviderInterface;
 
-class  SaveController extends Controller
+class  UpdatelistController extends Controller
 {
     public function __invoke(DataProviderInterface $dataProvider, array $params)
     {
         $mapHistory = new MapHistory($dataProvider);
 
-        $mapHistory->create($params['address']);
+        echo json_encode($mapHistory->getMapHistory());
     }
+
 }

@@ -6,13 +6,12 @@ use App\Helpers\DataProvider\DataProviderInterface;
 use App\Helpers\GoogleMap;
 use App\Models\MapHistory;
 
-
 class IndexController extends Controller
 {
 
     const PAGE = 'index';
 
-    public function __invoke(DataProviderInterface $dataProvider)
+    public function __invoke(DataProviderInterface $dataProvider, array $params)
     {
         $title = 'mainpage';
         $description = 'mainpage';

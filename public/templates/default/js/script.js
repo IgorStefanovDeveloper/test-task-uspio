@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Функция для отправки AJAX запроса
     function sendAjaxRequest(inputValue) {
         let xhr = new XMLHttpRequest();
         xhr.open('GET', '?action=help&query=' + inputValue, true);
@@ -37,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
         xhr.send();
     }
 
-    // Функция для отображения подсказок
     function renderSuggestions(suggestions) {
         suggestionsList.innerHTML = ''; // Очищаем список подсказок
 
@@ -55,46 +53,38 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Функция для отображения подсказок
     function renderMapHistory(suggestions) {
         maphistory.innerHTML = ''; // Очищаем список подсказок
 
         if (suggestions.length > 0) {
             suggestions.forEach(function(item) {
                 let li = document.createElement('li');
-                li.textContent = item;
-                li.addEventListener('click', function() {
-                    input.value = item;
-                    sendAjaxRequestForSaleAndUpdateList();
-                    maphistory.innerHTML = ''; // Очищаем список подсказок
-                });
+                li.textContent = item.address;
                 maphistory.appendChild(li);
             });
         }
     }
 
-    // Проверка клика вне списка подсказок для скрытия списка
     document.addEventListener('click', function(event) {
         if (!suggestionsList.contains(event.target)) {
             suggestionsList.innerHTML = '';
         }
     });
 
-    // Функция для отправки AJAX запросов при выборе элемента из списка
     function sendAjaxRequestForSaleAndUpdateList() {
         let xhrSale = new XMLHttpRequest();
-        xhrSale.open('GET', '?ajax=sale&address=' + input.value, true);
+        xhrSale.open('GET', '?action=save&address=' + input.value, true);
         xhrSale.send();
 
         let xhrUpdateList = new XMLHttpRequest();
-        xhrUpdateList.open('GET', '?ajax=updatelist', true);
+        xhrUpdateList.open('GET', '?action=updatelist', true);
 
         xhrUpdateList.onreadystatechange = function() {
             if (xhrUpdateList.readyState === XMLHttpRequest.DONE) {
                 if (xhrUpdateList.status === 200) {
-                    renderMapHistory(JSON.parse(xhr.responseText));
+                    renderMapHistory(JSON.parse(xhrUpdateList.responseText));
                 } else {
-                    console.error('Error:', xhr.statusText);
+                    console.error('Error:', xhrUpdateList.statusText);
                 }
             }
         };

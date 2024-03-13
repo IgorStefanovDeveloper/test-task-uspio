@@ -18,7 +18,7 @@ class MapHistory
 
     public function create(string $address): bool
     {
-        $query = 'INSERT INTO ' . $this->table_name . ' (address) VALUES (' . $address . ')';
+        $query = 'INSERT INTO ' . $this->tableName . ' (address) VALUES ("' . $address . '")';
 
         if ($this->dataProvider->executeSql($query)) {
             return true;
@@ -31,7 +31,7 @@ class MapHistory
     {
         $offset = ($page - 1) * $perPage;
 
-        $query = 'SELECT * FROM map_history ORDER BY request_time DESC LIMIT ' . $offset . ',' . $perPage;
+        $query = 'SELECT * FROM ' . $this->tableName . ' ORDER BY request_time DESC LIMIT ' . $offset . ',' . $perPage;
 
         return $this->dataProvider->executeSql($query);
     }

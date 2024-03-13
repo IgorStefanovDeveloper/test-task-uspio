@@ -9,6 +9,7 @@
     <meta property="og:description" content="<?= $description ?>" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://maps.googleapis.com/maps/api/js?key=<?= getenv('GOOGLE_KEY') ?>&libraries=places"></script>
+    <script src="<?=  getenv('THEME') . 'js/script.js' ?>"></script>
 </head>
 <body>
 <div class="container">
